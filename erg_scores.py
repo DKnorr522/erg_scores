@@ -150,7 +150,9 @@ if __name__ == '__main__':
         wb = None
         while wb is None:
             choice = st.file_uploader("Choose an Excel file")
-            st.sidebar.text_input(choice)
+            name = st.sidebar.text_input(
+                f"{Choice = }\n{choice.read() =}"
+            )
             wb = choice.read() if choice.read()[:-5] == ".xlsx" else None
         sheet = wb[wb.sheetnames[0]]
         scores_weight_yes = scores_to_dict(sheet, True)
