@@ -167,11 +167,12 @@ if __name__ == '__main__':
     # '''
     # Sidebar
     # '''
-    st.sidebar.header("Please select rowers (no more than 6): ")
     code = st.sidebar.text_input(
         "Enter code:"
     )
     if code == "BRRC Henley":
+        st.sidebar.header("Please select rowers (no more than 6): ")
+        
         rowers = st.sidebar.multiselect(
             "Select the rowers:",
             options=scores_pd["Name"]
