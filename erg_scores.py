@@ -32,43 +32,43 @@ from rowing include *
 #     return split if weight is None else round(split * (weight/270)**.222, 1)
 
 
-def determine_split_bounds(rowers, scores):
-    minSplit = scores[rowers[0]]['splits'][0]
-    maxSplit = scores[rowers[0]]['splits'][0]
-
-    for rower in rowers:
-        for split in scores[rower]['splits']:
-            minSplit = min(minSplit, split)
-            maxSplit = max(maxSplit, split)
-
-    interval = 5  # bounds for the splits will be multiples of 5 seconds
-    # Get bounds
-    minBound = (int(minSplit) // interval) * interval
-    maxBound = ceil((maxSplit + (maxSplit-minBound) / 5) / interval) * interval
-
-    return [minBound, maxBound]
-
-
-def determine_range_scale(limits, majorInterval=15, minorInterval=5):
-    majorScaleVal = (limits[0] // majorInterval) * majorInterval
-    majorScaleVal = majorScaleVal if majorScaleVal >= limits[0] \
-        else majorScaleVal + majorInterval
-
-    majorScale = []
-    while majorScaleVal <= limits[1]:
-        majorScale.append(majorScaleVal)
-        majorScaleVal += majorInterval
-
-    minorScaleVal = (limits[0] // minorInterval) * minorInterval
-    minorScaleVal = minorScaleVal if minorScaleVal >= limits[0] \
-        else minorScaleVal + minorInterval
-
-    minorScale = []
-    while minorScaleVal <= limits[1]:
-        minorScale.append(minorScaleVal)
-        minorScaleVal += minorInterval
-
-    return majorScale, minorScale
+# def determine_split_bounds(rowers, scores):
+#     minSplit = scores[rowers[0]]['splits'][0]
+#     maxSplit = scores[rowers[0]]['splits'][0]
+#
+#     for rower in rowers:
+#         for split in scores[rower]['splits']:
+#             minSplit = min(minSplit, split)
+#             maxSplit = max(maxSplit, split)
+#
+#     interval = 5  # bounds for the splits will be multiples of 5 seconds
+#     # Get bounds
+#     minBound = (int(minSplit) // interval) * interval
+#     maxBound = ceil((maxSplit + (maxSplit-minBound) / 5) / interval) * interval
+#
+#     return [minBound, maxBound]
+#
+#
+# def determine_range_scale(limits, majorInterval=15, minorInterval=5):
+#     majorScaleVal = (limits[0] // majorInterval) * majorInterval
+#     majorScaleVal = majorScaleVal if majorScaleVal >= limits[0] \
+#         else majorScaleVal + majorInterval
+#
+#     majorScale = []
+#     while majorScaleVal <= limits[1]:
+#         majorScale.append(majorScaleVal)
+#         majorScaleVal += majorInterval
+#
+#     minorScaleVal = (limits[0] // minorInterval) * minorInterval
+#     minorScaleVal = minorScaleVal if minorScaleVal >= limits[0] \
+#         else minorScaleVal + minorInterval
+#
+#     minorScale = []
+#     while minorScaleVal <= limits[1]:
+#         minorScale.append(minorScaleVal)
+#         minorScaleVal += minorInterval
+#
+#     return majorScale, minorScale
 
 
 def scores_to_dict(sheet, weightAdj=False):
