@@ -70,15 +70,6 @@ def determine_range_scale(limits, majorInterval=15, minorInterval=5):
     return majorScale, minorScale
 
 
-def check_headers(headers, sheet):
-    for count, el in enumerate(headers):
-        cell = sheet.cell(row=1, column=count+1).value
-        if cell != el:
-            print("The Excel file seems to be formatted incorrectly. Check the column names.")
-            input(f"The column names should be, in order:\n\t{', '.join(headers[:-1])}")
-            quit()
-
-
 def scores_to_dict(sheet, weightAdj=False):
     scores = {}
 
@@ -145,19 +136,9 @@ def plot_splits(rowers, scores, dist=1000, weightAdjusted=False, showSplits=True
 
 if __name__ == '__main__':
 
-    file = "Test.xlsx"
-    scores_pd = pd.read_excel(file, sheet_name=0)  #, index_col='Name')
-    distance = int(pd.read_excel(file, sheet_name=1).values)
-
     st.set_page_config(page_title="Erg Scores",
                        layout="wide")
-    # st.write("""
-    # Erg scores here.
-    # """)
-
-    # '''
-    # Sidebar
-    # '''
+    
     code = st.sidebar.text_input(
         "Enter code:"
     )
@@ -166,6 +147,7 @@ if __name__ == '__main__':
         sheet = wb[wb.sheetnames[0]]
         scores_weight_yes = scores_to_dict(sheet, True)
         scores_weight_no = scores_to_dict(sheet, False)
+        
         st.sidebar.header("Please select rowers (no more than 6): ")
         
         rowers = st.sidebar.multiselect(
@@ -178,11 +160,7 @@ if __name__ == '__main__':
             options=["No", "Yes"]
         )
 
-#         wb = openpyxl.load_workbook("2022-07-17 Henley Erg Test.xlsx")
-#         sheet = wb[wb.sheetnames[0]]
-#         scores_weight_yes = scores_to_dict(sheet, True)
-#         scores_weight_no = scores_to_dict(sheet, False)
-
         weight_adjust = False if weight == "No" else True
         scores = scores_weight_yes if weight_adjust else scores_weight_no
+        distance = wb[wb.sheetnames[1]].cell(row=1, column=1).value
         plot_splits(rowers, scores, dist=distance, weightAdjusted=weight_adjust)
