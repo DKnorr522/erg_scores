@@ -136,13 +136,16 @@ def plot_splits(rowers, scores, dist=1000, weightAdjusted=False, showSplits=True
 
 if __name__ == '__main__':
 
+    code_to_use = "BRRC Erg"
+
     st.set_page_config(page_title="Erg Scores",
                        layout="wide")
     
     code = st.sidebar.text_input(
         "Enter code:"
     )
-    if code == "BRRC Henley":
+
+    if code == code_to_use:
         wb = openpyxl.load_workbook("2022-07-17 Henley Erg Test.xlsx")
         sheet = wb[wb.sheetnames[0]]
         scores_weight_yes = scores_to_dict(sheet, True)
