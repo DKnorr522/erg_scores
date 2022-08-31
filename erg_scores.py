@@ -1,10 +1,8 @@
 import pandas as pd
 import streamlit as st
-from os.path import splitext, basename, dirname, exists
 import openpyxl
 import matplotlib.pyplot as plt
 from math import floor, ceil
-
 
 
 def secBreakdown(time):
@@ -101,7 +99,7 @@ def scores_to_dict(sheet, weightAdj=False):
     return scores
 
 
-def plot_splits(rowers, scores, dist=1000, weightAdjusted=False, showSplits=True, plotsDir=""):
+def plot_splits(rowers, scores, dist=1000, weightAdjusted=False, showSplits=True):
     fig, ax = plt.subplots()
     if len(rowers) == 0:  # Exit if this gets called without any rowers, just in case
         return
@@ -138,13 +136,6 @@ def plot_splits(rowers, scores, dist=1000, weightAdjusted=False, showSplits=True
     plt.title(f"{ttlStart}Splits for {', '.join(rowers)}")
     plt.legend(ncol=len(rowers), loc='upper center')
 
-    # An empty directory name means to not save the plot
-    if plotsDir != "":
-        pre = "Weight Adjusted: " if weightAdjusted else ""
-        rowerNames = f"{ttlStart}{', '.join(rowers)}"
-        plt.savefig(f"{plotDir}/PNG/{rowerNames}.png")
-        plt.savefig(f"{plotDir}/EPS/{rowerNames}.eps")
-
     ax.grid(True, which='major', color='black', linestyle='-', alpha=.25)
     ax.grid(True, which='minor', color='gray', linestyle='--', alpha=.25)
     ax.minorticks_on()
@@ -171,24 +162,26 @@ if __name__ == '__main__':
         "Enter code:"
     )
     if code == "BRRC Henley":
+        wb = openpyxl.load_workbook("2022-07-17 Henley Erg Test.xlsx")
+        sheet = wb[wb.sheetnames[0]]
+        scores_weight_yes = scores_to_dict(sheet, True)
+        scores_weight_no = scores_to_dict(sheet, False)
         st.sidebar.header("Please select rowers (no more than 6): ")
         
         rowers = st.sidebar.multiselect(
             "Select the rowers:",
-            options=scores_pd["Name"]
+            options=scores_weight_yes.keys()
+#             options=scores_pd["Name"]
         )
         weight = st.sidebar.selectbox(
             "Weight Adjust?",
             options=["No", "Yes"]
         )
-        scores_selection = scores_pd.query(
-            "Name == @rowers"
-        )
 
-        wb = openpyxl.load_workbook("2022-07-17 Henley Erg Test.xlsx")
-        sheet = wb[wb.sheetnames[0]]
-        scores_weight_yes = scores_to_dict(sheet, True)
-        scores_weight_no = scores_to_dict(sheet, False)
+#         wb = openpyxl.load_workbook("2022-07-17 Henley Erg Test.xlsx")
+#         sheet = wb[wb.sheetnames[0]]
+#         scores_weight_yes = scores_to_dict(sheet, True)
+#         scores_weight_no = scores_to_dict(sheet, False)
 
         weight_adjust = False if weight == "No" else True
         scores = scores_weight_yes if weight_adjust else scores_weight_no
