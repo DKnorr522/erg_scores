@@ -114,7 +114,7 @@ def plot_splits(rowers, scores, dist=1000, weightAdjusted=False, showSplits=True
         split = scores[rower]['split']
         lbl = f"{rower}\n{sec2timePrintout(split)}"
         if weightAdjusted:
-            addendum = "\nNo Weight" if weight is None else f"\n- round({scores[rower]['split0']-split), 1} sec"
+            addendum = "\nNo Weight" if weight is None else f"\n- {round(scores[rower]['split0']-split), 1} sec"
             lbl += addendum
         plt.axhline(y=split, color=color, linestyle='--', label=lbl)
 
