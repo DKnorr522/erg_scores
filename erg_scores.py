@@ -2,10 +2,8 @@ import pandas as pd
 import streamlit as st
 from os.path import splitext, basename, dirname, exists
 import openpyxl
-from easygui import fileopenbox
 import matplotlib.pyplot as plt
 from math import floor, ceil
-from numpy import linspace
 
 
 
@@ -72,21 +70,6 @@ def determine_range_scale(limits, majorInterval=15, minorInterval=5):
         minorScaleVal += minorInterval
 
     return majorScale, minorScale
-
-
-def get_file_name():
-    name, dir_name, f_name, ext = "", "", "", ""
-    while ext != ".xlsx":
-        # input("Press 'Enter' to choose an Excel file.")
-
-        try:  # Just in case the user closes the popup explorer window
-            name = fileopenbox()
-            dir_name = dirname(name)
-            f_name, ext = splitext(basename(name))
-        except TypeError:
-            quit() if file is None else print(f"TypeError: file of type {type(name)}")
-
-    return name, dir_name, f_name
 
 
 def check_headers(headers, sheet):
