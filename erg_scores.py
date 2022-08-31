@@ -78,8 +78,12 @@ def scores_to_dict(sheet, weightAdj=False):
         scores[name] = {}
         weight = sheet.cell(row=i+2, column=2).value if weightAdj else None
         scores[name]['weight'] = weight
-        scores[name]['time'] = weightAdjustsplit(datetime2sec(sheet.cell(row=i+2, column=3).value), weight)
-        scores[name]['split'] = weightAdjustSplit(datetime2sec(sheet.cell(row=i+2, column=4).value), weight)
+        scores[name]['time'] = weightAdjustSplit(datetime2sec(sheet.cell(row=i+2, column=3).value), weight)
+        # scores[name]['split'] = weightAdjustSplit(datetime2sec(sheet.cell(row=i+2, column=4).value), weight)
+        split = datetime2sec(sheet.cell(row=i+2, column=4).value)
+        scores[name]['split'] = weightAdjustSplit(split, weight)
+        if weight is not None:
+            scores[name]['split0'] = split
         scores[name]['splits'] = []
         for j in range(5, sheet.max_column+1):
             cellVal = sheet.cell(row=i+2, column=j).value
