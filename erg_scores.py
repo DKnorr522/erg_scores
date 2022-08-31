@@ -136,7 +136,7 @@ def plot_splits(rowers, scores, dist=1000, weightAdjusted=False, showSplits=True
 
 if __name__ == '__main__':
 
-    code_to_use = "BRRC Erg"
+    code_to_use = st.secrets["code_word"]
 
     st.set_page_config(page_title="Erg Scores",
                        layout="wide")
