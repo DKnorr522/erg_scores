@@ -3,7 +3,7 @@ import streamlit as st
 import openpyxl
 import matplotlib.pyplot as plt
 from math import floor, ceil
-from repo.rowing include *
+from rowing include *
 
 
 # def secBreakdown(time):
