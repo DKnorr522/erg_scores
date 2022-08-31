@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 import openpyxl
 import matplotlib.pyplot as plt
-from math import floor, ceil, round
+from math import floor, ceil
 
 
 def secBreakdown(time):
