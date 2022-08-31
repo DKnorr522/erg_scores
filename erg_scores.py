@@ -114,7 +114,7 @@ def plot_splits(rowers, scores, dist=1000, weightAdjusted=False, showSplits=True
         split = scores[rower]['split']
         lbl = f"{rower}\n{sec2timePrintout(split)}"
         if weightAdjusted:
-            lbl = lbl + "\nNo Weight" if weight is None else lbl
+            lbl = lbl + "\nNo Weight" if weight is None else lbl + "\n- {scores[rower][split0]-split} sec"
         plt.axhline(y=split, color=color, linestyle='--', label=lbl)
 
     ylim = determine_split_bounds(rowers, scores)
