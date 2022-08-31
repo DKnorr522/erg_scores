@@ -1,6 +1,4 @@
-pandas
-streamlit
-os
+pandas=2.8.1
+streamlit=1.12.2
 openpyxl
 matplotlib
-math
