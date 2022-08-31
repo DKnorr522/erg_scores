@@ -1,5 +1,5 @@
-matplotlib==3.4.2
-numpy==1.21.0
-openpyxl==3.0.10
-pandas==1.4.3
-streamlit==1.12.2
+matplotlib
+numpy
+openpyxl
+pandas
+streamlit
