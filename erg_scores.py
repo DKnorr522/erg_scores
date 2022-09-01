@@ -3,6 +3,12 @@ import openpyxl
 from rowing import *
 
 
+# Turns a yes/no string into a bool
+# Does not check for proper input
+def yn2bool(option):
+    return True if option == "Yes" else False
+
+
 if __name__ == '__main__':
 
     # Defined with streamlit
@@ -34,10 +40,16 @@ if __name__ == '__main__':
             "Weight Adjust?",
             options=["No", "Yes"]
         )
+        # Yes or no on whether to show splits or just average split
+        splits = st.sidebar.selectbox(
+            "Show Splits?",
+            options=["Yes", "No"]
+        )
 
-        weight_adjust = False if weight == "No" else True  # turn Yes/No menu option into bool
+        weight_adjust = yn2bool(weight)  # turn Yes/No menu option into bool
+        show_splits = yn2bool(splits)
         scores = scores_weight_yes if weight_adjust else scores_weight_no  # select the relevant dictionary
         distance = wb[wb.sheetnames[1]].cell(row=1, column=1).value  # piece's distance is stored on sheet 2 cell A1
-        fig = plot_splits(rowers, scores, dist=distance, weightAdjusted=weight_adjust)
+        fig = plot_splits(rowers, scores, dist=distance, weightAdjusted=weight_adjust, showSplits=show_splits)
         if fig:
             st.pyplot(fig)
