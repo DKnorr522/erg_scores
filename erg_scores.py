@@ -21,17 +21,16 @@ def main():
         "Enter code:"
     )
 
-    pieces = os.listdir("pieces")
-
-    piece = st.sidebar.selectionbox(
-        "Choose a piece:",
-        options=pieces
-    )
-
-    wb = openpyxl.load_workbook(f"pieces/{piece}")
-
     # Only move on and show names if the correct code has been entered
     if code == code_to_use:
+        pieces = os.listdir("pieces")
+
+        piece = st.sidebar.selectionbox(
+            "Choose a piece:",
+            options=pieces
+        )
+        wb = openpyxl.load_workbook(f"pieces/{piece}")
+
         # wb = openpyxl.load_workbook("pieces/2022-07-17 Henley Erg Test.xlsx")
         sheet = wb[wb.sheetnames[0]]
         scores_weight_yes = scores_to_dict(sheet, True)
