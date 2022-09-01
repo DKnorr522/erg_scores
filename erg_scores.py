@@ -5,6 +5,7 @@ from rowing import *
 
 if __name__ == '__main__':
 
+    # Defined with streamlit
     code_to_use = st.secrets["code_word"]
 
     st.set_page_config(page_title="Erg Scores",
@@ -14,6 +15,7 @@ if __name__ == '__main__':
         "Enter code:"
     )
 
+    # Only move on and show names if the correct code has been entered
     if code == code_to_use:
         wb = openpyxl.load_workbook("2022-07-17 Henley Erg Test.xlsx")
         sheet = wb[wb.sheetnames[0]]
@@ -21,20 +23,21 @@ if __name__ == '__main__':
         scores_weight_no = scores_to_dict(sheet, False)
         
         st.sidebar.header("Please select rowers (no more than 6): ")
-        
+
+        # Allow multiple rowers to be selected
         rowers = st.sidebar.multiselect(
             "Select the rowers:",
             options=scores_weight_yes.keys()
-#             options=scores_pd["Name"]
         )
+        # Yes or no on whether to weight adjust
         weight = st.sidebar.selectbox(
             "Weight Adjust?",
             options=["No", "Yes"]
         )
 
-        weight_adjust = False if weight == "No" else True
-        scores = scores_weight_yes if weight_adjust else scores_weight_no
-        distance = wb[wb.sheetnames[1]].cell(row=1, column=1).value
+        weight_adjust = False if weight == "No" else True  # turn Yes/No menu option into bool
+        scores = scores_weight_yes if weight_adjust else scores_weight_no  # select the relevant dictionary
+        distance = wb[wb.sheetnames[1]].cell(row=1, column=1).value  # piece's distance is stored on sheet 2 cell A1
         fig = plot_splits(rowers, scores, dist=distance, weightAdjusted=weight_adjust)
         if fig:
             st.pyplot(fig)
