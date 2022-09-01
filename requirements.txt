@@ -3,3 +3,4 @@ numpy
 openpyxl
 pandas
 streamlit
+git+https://github.com/DKnorr522/rowing.git
