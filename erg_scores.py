@@ -9,8 +9,7 @@ def yn2bool(option):
     return True if option == "Yes" else False
 
 
-if __name__ == '__main__':
-
+def main():
     # Defined with streamlit
     code_to_use = st.secrets["code_word"]
 
@@ -27,7 +26,7 @@ if __name__ == '__main__':
         sheet = wb[wb.sheetnames[0]]
         scores_weight_yes = scores_to_dict(sheet, True)
         scores_weight_no = scores_to_dict(sheet, False)
-        
+
         st.sidebar.header("Please select rowers (no more than 6): ")
 
         # Allow multiple rowers to be selected
@@ -53,3 +52,7 @@ if __name__ == '__main__':
         fig = plot_splits(rowers, scores, dist=distance, weightAdjusted=weight_adjust, showSplits=show_splits)
         if fig:
             st.pyplot(fig)
+
+
+if __name__ == '__main__':
+    main()
