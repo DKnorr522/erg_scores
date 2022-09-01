@@ -31,36 +31,38 @@ def main():
         )
         wb = openpyxl.load_workbook(f"pieces/{piece}")
 
-        # wb = openpyxl.load_workbook("pieces/2022-07-17 Henley Erg Test.xlsx")
-        sheet = wb[wb.sheetnames[0]]
-        scores_weight_yes = scores_to_dict(sheet, True)
-        scores_weight_no = scores_to_dict(sheet, False)
+        if wb:
 
-        st.sidebar.header("Please select rowers (no more than 6): ")
+            # wb = openpyxl.load_workbook("pieces/2022-07-17 Henley Erg Test.xlsx")
+            sheet = wb[wb.sheetnames[0]]
+            scores_weight_yes = scores_to_dict(sheet, True)
+            scores_weight_no = scores_to_dict(sheet, False)
 
-        # Allow multiple rowers to be selected
-        rowers = st.sidebar.multiselect(
-            "Select the rowers:",
-            options=scores_weight_yes.keys()
-        )
-        # Yes or no on whether to weight adjust
-        weight = st.sidebar.selectbox(
-            "Weight Adjust?",
-            options=["No", "Yes"]
-        )
-        # Yes or no on whether to show splits or just average split
-        splits = st.sidebar.selectbox(
-            "Show Splits?",
-            options=["Yes", "No"]
-        )
+            st.sidebar.header("Please select rowers (no more than 6): ")
 
-        weight_adjust = yn2bool(weight)  # turn Yes/No menu option into bool
-        show_splits = yn2bool(splits)
-        scores = scores_weight_yes if weight_adjust else scores_weight_no  # select the relevant dictionary
-        distance = wb[wb.sheetnames[1]].cell(row=1, column=1).value  # piece's distance is stored on sheet 2 cell A1
-        fig = plot_splits(rowers, scores, dist=distance, weightAdjusted=weight_adjust, showSplits=show_splits)
-        if fig:
-            st.pyplot(fig)
+            # Allow multiple rowers to be selected
+            rowers = st.sidebar.multiselect(
+                "Select the rowers:",
+                options=scores_weight_yes.keys()
+            )
+            # Yes or no on whether to weight adjust
+            weight = st.sidebar.selectbox(
+                "Weight Adjust?",
+                options=["No", "Yes"]
+            )
+            # Yes or no on whether to show splits or just average split
+            splits = st.sidebar.selectbox(
+                "Show Splits?",
+                options=["Yes", "No"]
+            )
+
+            weight_adjust = yn2bool(weight)  # turn Yes/No menu option into bool
+            show_splits = yn2bool(splits)
+            scores = scores_weight_yes if weight_adjust else scores_weight_no  # select the relevant dictionary
+            distance = wb[wb.sheetnames[1]].cell(row=1, column=1).value  # piece's distance is stored on sheet 2 cell A1
+            fig = plot_splits(rowers, scores, dist=distance, weightAdjusted=weight_adjust, showSplits=show_splits)
+            if fig:
+                st.pyplot(fig)
 
 
 if __name__ == '__main__':
