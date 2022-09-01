@@ -30,7 +30,7 @@ def main():
             options=pieces
         )
         # wb = openpyxl.load_workbook(f"pieces/{piece}")
-        piece = piece
+        piece = piece[0]
 
         if piece:
             # wb = openpyxl.load_workbook("pieces/2022-07-17 Henley Erg Test.xlsx")
