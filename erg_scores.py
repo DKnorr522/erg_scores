@@ -175,4 +175,5 @@ if __name__ == '__main__':
         scores = scores_weight_yes if weight_adjust else scores_weight_no
         distance = wb[wb.sheetnames[1]].cell(row=1, column=1).value
         fig = plot_splits(rowers, scores, dist=distance, weightAdjusted=weight_adjust)
-        st.pyplot(fig)
+        if fig:
+            st.pyplot(fig)
