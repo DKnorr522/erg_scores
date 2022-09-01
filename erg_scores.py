@@ -34,7 +34,7 @@ def main():
         if piece:
             # wb = openpyxl.load_workbook("pieces/2022-07-17 Henley Erg Test.xlsx")
             wb = openpyxl.load_workbook(f"pieces/{piece}")
-            # st.info(wb)
+            st.info(piece)
             sheet = wb[wb.sheetnames[0]]
             scores_weight_yes = scores_to_dict(sheet, True)
             scores_weight_no = scores_to_dict(sheet, False)
