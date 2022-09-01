@@ -35,8 +35,8 @@ def main():
             # wb = openpyxl.load_workbook("pieces/2022-07-17 Henley Erg Test.xlsx")
             wb = openpyxl.load_workbook(f"pieces/{piece}")
             sheet = wb[wb.sheetnames[0]]
+            st.info(sheet)
             scores_weight_yes = scores_to_dict(sheet, True)
-            st.info("here")
             scores_weight_no = scores_to_dict(sheet, False)
 
             st.sidebar.header("Please select rowers (no more than 6): ")
