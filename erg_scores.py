@@ -27,7 +27,7 @@ def main():
 
         piece = st.sidebar.selectbox(
             "Choose a piece:",
-            options=pieces
+            options=pieces,
             default=""
         )
         wb = openpyxl.load_workbook(f"pieces/{piece}")
