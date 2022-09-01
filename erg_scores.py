@@ -24,12 +24,12 @@ def main():
     # Only move on and show names if the correct code has been entered
     if code == code_to_use:
         pieces = os.listdir("pieces")
+        st.info(pieces)
 
         piece = st.sidebar.selectbox(
             "Choose a piece:",
             options=pieces
         )
-        st.info(piece)
         # wb = openpyxl.load_workbook(f"pieces/{piece}")
 
         if piece:
