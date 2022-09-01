@@ -25,14 +25,11 @@ def main():
     if code == code_to_use:
         pieces = os.listdir("pieces")
 
-        piece = st.sidebar.selectionbox(
+        piece = st.sidebar.selectbox(
             "Choose a piece:",
             options=pieces
         )
         wb = openpyxl.load_workbook(f"pieces/{piece}")
-        st.write(
-            wb
-        )
 
         if wb:
             # wb = openpyxl.load_workbook("pieces/2022-07-17 Henley Erg Test.xlsx")
