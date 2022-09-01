@@ -30,7 +30,6 @@ def main():
             options=pieces
         )
         wb = openpyxl.load_workbook(f"pieces/{piece}")
-        st.set_page_config(page_title=type(wb))
 
         if wb:
             # wb = openpyxl.load_workbook("pieces/2022-07-17 Henley Erg Test.xlsx")
