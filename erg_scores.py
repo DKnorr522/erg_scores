@@ -29,6 +29,8 @@ def main():
             "Choose a piece:",
             options=pieces
         )
+        st.set_page_config(page_title=f"piece",
+                           layout="wide")
         # wb = openpyxl.load_workbook(f"pieces/{piece}")
 
         if piece:
