@@ -50,7 +50,7 @@ def main():
                 "Choose a piece:",
                 options=wb.sheetnames
             )
-            st.write(distance)
+            st.write(type(distance))
             sheet = wb[piece]
 
             # wb = openpyxl.load_workbook(f"pieces/{piece}")
