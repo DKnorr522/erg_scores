@@ -19,30 +19,25 @@ def main():
     # Only move on and show names if the correct code has been entered
     if code == code_to_use:
 
+        # Get all the files in the "pieces" folder. Should only be Excel files, but it doesn't actually matter
         files = os.listdir("pieces")
-
-        distances = []
 
         # Regular expression patterns for the files and to pull out the distances
         pattern = r"\d+m Tests.xlsx"
         dist_pattern = r"\d+"
 
-        # for file in files:
-        #     # Only cares about Excel files that are properly named
-        #     if re.fullmatch(pattern, file):
-        #         dist = re.match(dist_pattern, file).group()
-        #         distances.append(dist)
-
+        # List comprehension to get all Excel files with proper titles
         distances = [re.match(dist_pattern, file).group() for file in files if re.fullmatch(pattern, file)]
         distances.sort()
 
+        # Choose the distance of the piece
         distance = st.sidebar.selectbox(
             "Choose a distance:",
-            options=distances,
-            0
+            options=distances
         )
-        distance = int(distance)
+        distance = int(distance)  # selectbox returns a string, so need to typecast
 
+        # Open the Excel file then choose the piece
         wb = openpyxl.load_workbook(f"pieces/{distance}m Tests.xlsx")
         piece = st.sidebar.selectbox(
             "Choose a piece:",
@@ -71,7 +66,7 @@ def main():
 
         scores = scores_weight_yes if weight_adjust else scores_weight_no  # select the relevant dictionary
         fig = plot_splits(rowers, scores, dist=distance, weightAdjusted=weight_adjust, showSplits=show_splits)
-        if fig:
+        if fig:  # Without this a blank plot is shown until a name is selected
             st.pyplot(fig)
 
 
