@@ -38,7 +38,8 @@ def main():
 
         distance = st.sidebar.selectbox(
             "Choose a distance:",
-            options=distances
+            options=distances,
+            0
         )
         distance = int(distance)
 
