@@ -46,7 +46,7 @@ def main():
         # if piece:
         if dist_choice:
             wb = openpyxl.load_workbook(f"pieces/{dist_choice}m.xlsx")
-            piece = st.sidebar.multiselect(
+            piece = st.sidebar.selectbox(
                 "Choose a piece:",
                 options=wb.sheetnames
             )
