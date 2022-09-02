@@ -50,6 +50,7 @@ def main():
                 "Choose a piece:",
                 options=wb.sheetnames
             )
+            st.write(piece)
             sheet = wb[wb.sheetnames[piece]]
 
             # wb = openpyxl.load_workbook(f"pieces/{piece}")
