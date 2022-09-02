@@ -48,7 +48,7 @@ def main():
             #     "Weight Adjust?",
             #     options=["No", "Yes"]
             # )
-            weight = st.checkbox(
+            weight_adjust = st.checkbox(
                 "Weight Adjust",
                 value=False
             )
@@ -57,7 +57,7 @@ def main():
             #     "Show Splits?",
             #     options=["Yes", "No"]
             # )
-            splits = st.checkbox(
+            show_splits = st.checkbox(
                 "Show Splits",
                 value=True
             )
