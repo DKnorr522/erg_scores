@@ -31,7 +31,7 @@ def main():
                 dist = re.match(dist_pattern, file).group()
                 distances.append(dist)
 
-        dist_choice = st.sidebar.selectbox(
+        distance = st.sidebar.selectbox(
             "Choose a distance",
             options=distances
         )
@@ -44,8 +44,8 @@ def main():
         # )
 
         # if piece:
-        if dist_choice:
-            wb = openpyxl.load_workbook(f"pieces/{dist_choice}m.xlsx")
+        if distance:
+            wb = openpyxl.load_workbook(f"pieces/{distance}m.xlsx")
             piece = st.sidebar.selectbox(
                 "Choose a piece:",
                 options=wb.sheetnames
