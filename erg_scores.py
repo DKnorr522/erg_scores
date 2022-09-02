@@ -6,8 +6,7 @@ from rowing import *
 
 
 def main():
-    # Defined with streamlit
-    code_to_use = st.secrets["code_word"]
+    code_to_use = st.secrets["code_word"]  # Defined with streamlit
 
     st.set_page_config(page_title="Erg Scores",
                        layout="wide")
@@ -16,15 +15,15 @@ def main():
         "Enter code:"
     )
 
-    # Only move on and show names if the correct code has been entered
+    # Only move on if the correct code has been entered
     if code == code_to_use:
 
         # Get all the files in the "pieces" folder. Should only be Excel files, but it doesn't actually matter
         files = os.listdir("pieces")
 
         # Regular expression patterns for the files and to pull out the distances
-        pattern = r"\d+m Tests.xlsx"
         dist_pattern = r"\d+"
+        patter = rf"{dist_pattern}m Tests.xlsx"
 
         # List comprehension to get all Excel files with proper titles
         distances = [re.match(dist_pattern, file).group() for file in files if re.fullmatch(pattern, file)]
@@ -48,9 +47,9 @@ def main():
         scores_weight_yes = scores_to_dict(sheet, True)
         scores_weight_no = scores_to_dict(sheet, False)
 
+        # Get names for the plot. Plot can show up to 6 people
         st.sidebar.header("Please select rowers (no more than 6): ")
 
-        # Allow multiple rowers to be selected
         rowers = st.sidebar.multiselect(
             "Select the rowers:",
             options=scores_weight_yes.keys()
