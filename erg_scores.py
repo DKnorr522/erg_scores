@@ -50,6 +50,7 @@ def main():
                 "Choose a piece:",
                 options=wb.sheetnames
             )
+            distance = int(distance)
             st.write(type(distance))
             sheet = wb[piece]
 
