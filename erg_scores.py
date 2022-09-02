@@ -23,7 +23,7 @@ def main():
 
         # Regular expression patterns for the files and to pull out the distances
         dist_pattern = r"\d+"
-        patter = rf"{dist_pattern}m Tests.xlsx"
+        pattern = rf"{dist_pattern}m Tests.xlsx"
 
         # List comprehension to get all Excel files with proper titles
         distances = [re.match(dist_pattern, file).group() for file in files if re.fullmatch(pattern, file)]
