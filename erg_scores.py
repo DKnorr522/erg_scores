@@ -33,7 +33,9 @@ def main():
         #         dist = re.match(dist_pattern, file).group()
         #         distances.append(dist)
 
-        distances = [re.match(dist_pattern, file).group() for file in files if re.fullmatch(pattern, file)].sort()
+        distances = [re.match(dist_pattern, file).group() for file in files if re.fullmatch(pattern, file)]
+        distances.sort()
+
         distance = st.sidebar.selectbox(
             "Choose a distance:",
             options=distances
