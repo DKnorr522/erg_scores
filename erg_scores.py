@@ -1,6 +1,7 @@
 import streamlit as st
 import openpyxl
 import os
+import re
 from rowing import *
 
 
@@ -17,16 +18,42 @@ def main():
 
     # Only move on and show names if the correct code has been entered
     if code == code_to_use:
-        pieces = os.listdir("pieces")
 
-        piece = st.sidebar.selectbox(
-            "Choose a piece:",
-            options=pieces
+        files = os.listdir("pieces")
+
+        distances = []
+
+        pattern = r"\d+m.xlsx"
+        dist_pattern = r"\d+"
+
+        for file in files:
+            if re.fullmatch(pattern, file):
+                dist = re.match(dist_pattern, file).group()
+                distances.append(dist)
+
+        dist_choice = st.sidebar.selectbox(
+            "Choose a distance",
+            options=distances
         )
 
-        if piece:
-            wb = openpyxl.load_workbook(f"pieces/{piece}")
-            sheet = wb[wb.sheetnames[0]]
+        # pieces = os.listdir("pieces")
+        #
+        # piece = st.sidebar.selectbox(
+        #     "Choose a piece:",
+        #     options=pieces
+        # )
+
+        # if piece:
+        if dist_choice:
+            wb = openpyxl.load_workbook(f"pieces/{dist_choice}m.xlsx")
+            piece = st.sidebar.multiselect(
+                "Choose a piece:",
+                options=wb.sheetnames
+            )
+            sheet = wb[wb.sheetnames[piece]]
+
+            # wb = openpyxl.load_workbook(f"pieces/{piece}")
+            # sheet = wb[wb.sheetnames[0]]
             scores_weight_yes = scores_to_dict(sheet, True)
             scores_weight_no = scores_to_dict(sheet, False)
 
