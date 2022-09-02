@@ -23,15 +23,17 @@ def main():
 
         distances = []
 
+        # Regular expression patterns for the files and to pull out the distances
         pattern = r"\d+m Tests.xlsx"
         dist_pattern = r"\d+"
 
-        for file in files:
-            # Only cares about Excel files that are properly named
-            if re.fullmatch(pattern, file):
-                dist = re.match(dist_pattern, file).group()
-                distances.append(dist)
+        # for file in files:
+        #     # Only cares about Excel files that are properly named
+        #     if re.fullmatch(pattern, file):
+        #         dist = re.match(dist_pattern, file).group()
+        #         distances.append(dist)
 
+        distances = [re.match(dist_pattern, file).group() for file in files if re.fullmatch(pattern, file)]
         distance = st.sidebar.selectbox(
             "Choose a distance:",
             options=distances
@@ -65,7 +67,6 @@ def main():
         )
 
         scores = scores_weight_yes if weight_adjust else scores_weight_no  # select the relevant dictionary
-        # distance = wb[wb.sheetnames[1]].cell(row=1, column=1).value  # piece's distance is stored on sheet 2 cell A1
         fig = plot_splits(rowers, scores, dist=distance, weightAdjusted=weight_adjust, showSplits=show_splits)
         if fig:
             st.pyplot(fig)
