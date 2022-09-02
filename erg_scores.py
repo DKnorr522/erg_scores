@@ -44,18 +44,26 @@ def main():
                 options=scores_weight_yes.keys()
             )
             # Yes or no on whether to weight adjust
-            weight = st.sidebar.selectbox(
-                "Weight Adjust?",
-                options=["No", "Yes"]
+            # weight = st.sidebar.selectbox(
+            #     "Weight Adjust?",
+            #     options=["No", "Yes"]
+            # )
+            weight = st.checkbox(
+                "Weight Adjust",
+                value=False
             )
             # Yes or no on whether to show splits or just average split
-            splits = st.sidebar.selectbox(
-                "Show Splits?",
-                options=["Yes", "No"]
+            # splits = st.sidebar.selectbox(
+            #     "Show Splits?",
+            #     options=["Yes", "No"]
+            # )
+            splits = st.checkbox(
+                "Show Splits",
+                value=True
             )
 
-            weight_adjust = yn2bool(weight)  # turn Yes/No menu option into bool
-            show_splits = yn2bool(splits)
+            # weight_adjust = yn2bool(weight)  # turn Yes/No menu option into bool
+            # show_splits = yn2bool(splits)
             scores = scores_weight_yes if weight_adjust else scores_weight_no  # select the relevant dictionary
             distance = wb[wb.sheetnames[1]].cell(row=1, column=1).value  # piece's distance is stored on sheet 2 cell A1
             fig = plot_splits(rowers, scores, dist=distance, weightAdjusted=weight_adjust, showSplits=show_splits)
