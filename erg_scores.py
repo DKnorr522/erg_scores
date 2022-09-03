@@ -6,14 +6,17 @@ from rowing import *
 
 
 def main():
-    code_to_use = st.secrets["code_word"]  # Defined with streamlit
+    # code_to_use = st.secrets["code_word"]  # Defined with streamlit
 
     st.set_page_config(page_title="Erg Scores",
                        layout="wide")
 
-    code = st.sidebar.text_input(
-        "Enter code:"
-    )
+    # code = st.sidebar.text_input(
+    #     "Enter code:"
+    # )
+
+    code_to_use = "code"
+    code = code_to_use
 
     # Only move on if the correct code has been entered
     if code == code_to_use:
