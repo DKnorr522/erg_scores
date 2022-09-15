@@ -51,7 +51,7 @@ def main():
         scores_weight_no = scores_to_dict(sheet, False)
 
         # Get names for the plot. Plot can show up to 6 people
-        st.sidebar.header("Please select rowers (no more than 6): ")
+        st.header("Please select rowers (no more than 6): ")
 
         rowers = st.multiselect(
             "Select the rowers:",
