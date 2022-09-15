@@ -32,19 +32,20 @@ def main():
         distances = [re.match(dist_pattern, file).group() for file in files if re.fullmatch(pattern, file)]
         distances.sort()
 
-        # Choose the distance of the piece
-        distance = st.selectbox(
-            "Choose a distance:",
-            options=distances
-        )
-        distance = int(distance)  # selectbox returns a string, so need to typecast
+        with st.expander("", expanded=True):
+            # Choose the distance of the piece
+            distance = st.selectbox(
+                "Choose a distance:",
+                options=distances
+            )
+            distance = int(distance)  # selectbox returns a string, so need to typecast
 
-        # Open the Excel file then choose the piece
-        wb = openpyxl.load_workbook(f"pieces/{distance}m Tests.xlsx")
-        piece = st.selectbox(
-            "Choose a piece:",
-            options=wb.sheetnames
-        )
+            # Open the Excel file then choose the piece
+            wb = openpyxl.load_workbook(f"pieces/{distance}m Tests.xlsx")
+            piece = st.selectbox(
+                "Choose a piece:",
+                options=wb.sheetnames
+            )
 
         sheet = wb[piece]
         scores_weight_yes = scores_to_dict(sheet, True)
