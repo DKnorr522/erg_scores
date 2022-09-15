@@ -46,18 +46,6 @@ def main():
                 value=True
             )
 
-        scores = scores_weight_yes if weight_adjust else scores_weight_no  # select the relevant dictionary
-        fig = plot_splits(rowers, scores, dist=distance, weightAdjusted=weight_adjust, showSplits=show_splits)
-
-        if fig:  # Without this a blank plot is shown until a name is selected
-            st.pyplot(fig)
-            # st.download_button("Save plot", fig, file_name=saveName)
-            st.download_button(
-                label="Save plot",
-                data=open(fig, 'rb').read()
-            )
-
-
     # code_to_use = st.secrets["code_word"]  # Defined with streamlit
 
     st.set_page_config(page_title="Erg Scores",
@@ -131,17 +119,17 @@ def main():
         #         "Show Splits",
         #         value=True
         #     )
-        #
-        # scores = scores_weight_yes if weight_adjust else scores_weight_no  # select the relevant dictionary
-        # fig = plot_splits(rowers, scores, dist=distance, weightAdjusted=weight_adjust, showSplits=show_splits)
-        #
-        # if fig:  # Without this a blank plot is shown until a name is selected
-        #     st.pyplot(fig)
-        #     # st.download_button("Save plot", fig, file_name=saveName)
-        #     st.download_button(
-        #         label="Save plot",
-        #         data=open(fig, 'rb').read()
-        #     )
+
+        scores = scores_weight_yes if weight_adjust else scores_weight_no  # select the relevant dictionary
+        fig = plot_splits(rowers, scores, dist=distance, weightAdjusted=weight_adjust, showSplits=show_splits)
+
+        if fig:  # Without this a blank plot is shown until a name is selected
+            st.pyplot(fig)
+            # st.download_button("Save plot", fig, file_name=saveName)
+            st.download_button(
+                label="Save plot",
+                data=open(fig, 'rb').read()
+            )
 
 
 if __name__ == '__main__':
