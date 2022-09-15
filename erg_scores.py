@@ -77,7 +77,10 @@ def main():
         if fig:  # Without this a blank plot is shown until a name is selected
             st.pyplot(fig)
             # st.download_button("Save plot", fig, file_name=saveName)
-            st.download_button("Save plot", "data")
+            st.download_button(
+                label="Save plot",
+                data=open(fig, 'rb').read()
+            )
 
 
 if __name__ == '__main__':
