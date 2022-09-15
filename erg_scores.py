@@ -33,7 +33,7 @@ def main():
         distances.sort()
 
         # Choose the distance of the piece
-        distance = st.sidebar.selectbox(
+        distance = st.selectbox(
             "Choose a distance:",
             options=distances
         )
@@ -41,7 +41,7 @@ def main():
 
         # Open the Excel file then choose the piece
         wb = openpyxl.load_workbook(f"pieces/{distance}m Tests.xlsx")
-        piece = st.sidebar.selectbox(
+        piece = st.selectbox(
             "Choose a piece:",
             options=wb.sheetnames
         )
@@ -53,15 +53,15 @@ def main():
         # Get names for the plot. Plot can show up to 6 people
         st.sidebar.header("Please select rowers (no more than 6): ")
 
-        rowers = st.sidebar.multiselect(
+        rowers = st.multiselect(
             "Select the rowers:",
             options=scores_weight_yes.keys()
         )
-        weight_adjust = st.sidebar.checkbox(
+        weight_adjust = st.checkbox(
             "Weight Adjust",
             value=False
         )
-        show_splits = st.sidebar.checkbox(
+        show_splits = st.checkbox(
             "Show Splits",
             value=True
         )
