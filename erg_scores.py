@@ -80,6 +80,8 @@ def main():
         except:
             print(f"{type(fig) = }\n{type(saveName) = }")
 
+        print(f"\tMade it\n\t{type(fig) = }\n\t{type(saveName) = }")
+
         if fig:  # Without this a blank plot is shown until a name is selected
             st.pyplot(fig)
 
