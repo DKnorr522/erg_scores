@@ -73,7 +73,7 @@ def main():
     # Only move on if the correct code has been entered
     if code == code_to_use:
 
-        sidebar = False
+        sidebar = True
 
         # Get all the files in the "pieces" folder. Should only be Excel files, but it doesn't actually matter
         files = os.listdir("pieces")
