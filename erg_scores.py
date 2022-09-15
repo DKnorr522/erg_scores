@@ -78,7 +78,7 @@ def main():
         try:
             fig, saveName = plot_splits(rowers, scores, dist=distance, weightAdjusted=weight_adjust, showSplits=show_splits)
         except:
-            print(f"{type(fig) = }\n{type(saveName = )}")
+            print(f"{type(fig) = }\n{type(saveName) = }")
 
         if fig:  # Without this a blank plot is shown until a name is selected
             st.pyplot(fig)
