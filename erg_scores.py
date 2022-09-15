@@ -33,8 +33,10 @@ def main():
         distances.sort()
 
         with st.expander("", expanded=True):
+            col_dist, col_piece = st.columns(2)
+
             # Choose the distance of the piece
-            distance = st.selectbox(
+            distance = col_dist.selectbox(
                 "Choose a distance:",
                 options=distances
             )
@@ -42,7 +44,7 @@ def main():
 
             # Open the Excel file then choose the piece
             wb = openpyxl.load_workbook(f"pieces/{distance}m Tests.xlsx")
-            piece = st.selectbox(
+            piece = col_piece.selectbox(
                 "Choose a piece:",
                 options=wb.sheetnames
             )
