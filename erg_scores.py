@@ -57,14 +57,19 @@ def main():
             "Select the rowers:",
             options=scores_weight_yes.keys()
         )
-        weight_adjust = st.checkbox(
-            "Weight Adjust",
-            value=False
-        )
-        show_splits = st.checkbox(
-            "Show Splits",
-            value=True
-        )
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            weight_adjust = st.checkbox(
+                "Weight Adjust",
+                value=False
+            )
+        with col2:
+            show_splits = st.checkbox(
+                "Show Splits",
+                value=True
+            )
 
         scores = scores_weight_yes if weight_adjust else scores_weight_no  # select the relevant dictionary
         fig = plot_splits(rowers, scores, dist=distance, weightAdjusted=weight_adjust, showSplits=show_splits)
