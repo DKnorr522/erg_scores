@@ -26,32 +26,32 @@ def main():
 
         # Regular expression patterns for the files and to pull out the distances
         dist_pattern = r"\d+"
-        pattern = rf"{dist_pattern}m Tests.xlsx"
+        file_pattern = rf"{dist_pattern}m Tests.xlsx"
 
         # List comprehension to get all Excel files with proper titles
-        distances = [re.match(dist_pattern, file).group() for file in files if re.fullmatch(pattern, file)]
+        distances = [re.match(dist_pattern, file).group() for file in files if re.fullmatch(file_pattern, file)]
         distances.sort()
 
         with st.expander("", expanded=True):
             col_dist, col_piece = st.columns(2)
 
-            # Choose the distance of the piece
-            distance = col_dist.selectbox(
-                "Choose a distance:",
-                options=distances
-            )
+            with col_dist:  # Choose the distance of the piece
+                distance = st.selectbox(
+                    "Choose a distance:",
+                    options=distances
+                )
             distance = int(distance)  # selectbox returns a string, so need to typecast
 
-            # Open the Excel file then choose the piece
-            wb = openpyxl.load_workbook(f"pieces/{distance}m Tests.xlsx")
-            piece = col_piece.selectbox(
-                "Choose a piece:",
-                options=wb.sheetnames
-            )
+            with col_piece:  # Open the Excel file then choose the piece
+                wb = openpyxl.load_workbook(f"pieces/{distance}m Tests.xlsx")
+                piece = st.selectbox(
+                    "Choose a piece:",
+                    options=wb.sheetnames
+                )
 
         sheet = wb[piece]
-        scores_weight_yes = scores_to_dict(sheet, True)
-        scores_weight_no = scores_to_dict(sheet, False)
+        scores_weight_yes = scores_to_dict(sheet, weightAdj=True)
+        scores_weight_no = scores_to_dict(sheet, weightAdj=False)
 
         # Get names for the plot. Plot can show up to 6 people
         st.header("Please select rowers (no more than 6): ")
@@ -61,14 +61,14 @@ def main():
             options=scores_weight_yes.keys()
         )
 
-        col1, col2 = st.columns(2)
+        col_weight, col_splits = st.columns(2)
 
-        with col1:
+        with col_weight:
             weight_adjust = st.checkbox(
                 "Weight Adjust",
                 value=False
             )
-        with col2:
+        with col_splits:
             show_splits = st.checkbox(
                 "Show Splits",
                 value=True
