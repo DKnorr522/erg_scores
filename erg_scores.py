@@ -75,7 +75,7 @@ def main():
             )
 
         scores = scores_weight_yes if weight_adjust else scores_weight_no  # select the relevant dictionary
-        fig = plot_splits(rowers, scores, dist=distance, weightAdjusted=weight_adjust, showSplits=show_splits)
+        fig = plot_splits(rowers, scores, dist=distance, weight_adjusted=weight_adjust, show_splits=show_splits)
 
         if fig:  # Without this a blank plot is shown until a name is selected
             st.pyplot(fig)
