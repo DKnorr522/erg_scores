@@ -2,7 +2,7 @@ import streamlit as st
 import openpyxl
 import os
 import re
-from rowing import *
+from rowing_functions import *
 
 
 def main():
@@ -50,8 +50,8 @@ def main():
                 )
 
         sheet = wb[piece]
-        scores_weight_yes = scores_to_dict(sheet, weightAdj=True)
-        scores_weight_no = scores_to_dict(sheet, weightAdj=False)
+        scores_weight_yes = scores_to_dict(sheet, weight_adj=True)
+        scores_weight_no = scores_to_dict(sheet, weight_adj=False)
 
         # Get names for the plot. Plot can show up to 6 people
         st.header("Please select rowers (no more than 6): ")
